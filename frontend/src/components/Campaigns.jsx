@@ -181,37 +181,38 @@ export default function Campaigns() {
             data-testid="campaign-lightbox"
           >
             <motion.div
-              initial={{ scale: 0.86, y: 30, opacity: 0 }}
+              initial={{ scale: 0.9, y: 30, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 16, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 240, damping: 26 }}
-              className="relative max-h-[92vh]"
+              className="relative w-[94vw] max-w-md rounded-[24px] bg-[#241a19] p-2.5 shadow-2xl ring-1 ring-white/10"
               onClick={(e) => e.stopPropagation()}
               data-testid="campaign-lightbox-panel"
             >
+              <button
+                type="button"
+                onClick={() => setZoom(null)}
+                aria-label="إغلاق العرض"
+                data-testid="campaign-lightbox-close"
+                className="absolute left-3.5 top-3.5 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/20 text-white backdrop-blur-sm transition hover:bg-[#ED1B26]"
+              >
+                <X size={18} />
+              </button>
               <SmartImage
                 img={zoom.img}
                 alt={`الحملة الإعلانية: ${zoom.name}`}
-                sizes="94vw"
+                sizes="90vw"
                 eager
                 natural
-                className="rounded-[24px]"
-                imgClassName="max-h-[78vh] w-auto max-w-[92vw]"
+                className="rounded-[18px]"
+                imgClassName="mx-auto max-h-[64vh] w-auto max-w-full rounded-[14px]"
+                style={{ background: 'transparent' }}
               />
-              <div className="mt-3 flex items-center justify-between gap-4 text-white">
-                <span className="font-display text-2xl">{zoom.name}</span>
-                <span className="text-xs text-white/80">{zoom.note}</span>
+              <div className="flex items-center justify-between gap-3 px-2 pb-1 pt-2.5 text-white">
+                <span className="font-display text-lg leading-none">{zoom.name}</span>
+                <span className="text-[10px] text-white/75 sm:text-xs">{zoom.note}</span>
               </div>
             </motion.div>
-            <button
-              type="button"
-              onClick={() => setZoom(null)}
-              aria-label="إغلاق العرض"
-              data-testid="campaign-lightbox-close"
-              className="absolute left-5 top-5 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition hover:bg-[#ED1B26]"
-            >
-              <X size={20} />
-            </button>
           </motion.div>
         )}
       </AnimatePresence>

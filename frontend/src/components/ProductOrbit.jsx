@@ -199,7 +199,7 @@ export default function ProductOrbit() {
             تجربة تفاعلية
           </p>
           <h2 className="font-display text-3xl leading-tight text-[#201a17] sm:text-4xl lg:text-5xl">
-            حرّك الماوس على الحلوى.. وخليها تجي إلك
+            لمس الحلوى.. وخليها تجي إلك
           </h2>
         </div>
         <div className="mt-8 sm:mt-12">
