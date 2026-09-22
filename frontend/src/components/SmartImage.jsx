@@ -3,6 +3,8 @@ import { useState } from 'react';
 /**
  * Responsive, LQIP-backed image with reserved aspect ratio (no layout shift).
  * `img` is a manifest entry: { w, h, webp: {size: url}, lqip }
+ * `natural` renders a plain flowing image (for lightboxes) instead of the
+ * ratio-reserved fill mode.
  */
 export default function SmartImage({
   img,
@@ -11,6 +13,7 @@ export default function SmartImage({
   imgClassName = '',
   fit = 'contain',
   eager = false,
+  natural = false,
   sizes = '(max-width: 768px) 92vw, 40vw',
   style,
 }) {
@@ -26,7 +29,7 @@ export default function SmartImage({
       style={{ backgroundImage: `url(${img.lqip})`, backgroundSize: 'cover', ...style }}
       data-testid={`img-${img.key}`}
     >
-      <div style={{ paddingBottom: `${ratio}%` }} aria-hidden="true" />
+      {!natural && <div style={{ paddingBottom: `${ratio}%` }} aria-hidden="true" />}
       <img
         src={fallback}
         srcSet={srcSet}
@@ -35,7 +38,7 @@ export default function SmartImage({
         loading={eager ? 'eager' : 'lazy'}
         decoding="async"
         onLoad={() => setLoaded(true)}
-        className={`absolute inset-0 h-full w-full ${
+        className={`${natural ? 'block h-auto w-auto' : 'absolute inset-0 h-full w-full'} ${
           fit === 'cover' ? 'object-cover' : 'object-contain'
         } transition-opacity duration-700 ${loaded ? 'opacity-100' : 'opacity-0'} ${imgClassName}`}
       />

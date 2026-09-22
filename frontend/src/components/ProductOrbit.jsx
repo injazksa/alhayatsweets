@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion, useAnimationFrame, useMotionValue, useReducedMotion } from 'framer-motion';
-import { X } from 'lucide-react';
 import SmartImage from './SmartImage';
 import ProductModal from './ProductModal';
 import { PRODUCTS, CAT_STYLE } from '../data/catalog';
 import { CandyCurve } from './Decor';
+import { prefetchAround } from '../utils';
 
 const IDS = ['yupo-meter', 'povi-marshmallow', 'pops-lollipops', 'cool-mint', 'choco-pako', 'yupo-worms', 'oneo-bubble', 'yupo-rencils'];
 const ITEMS = IDS.map((id) => PRODUCTS.find((p) => p.id === id));
 
 function OrbitItem({ idx, angle, size, pausedRef, selected, onSelect, onOpen }) {
-  const R = size / 2 - 64;
+  const R = size / 2 - 62;
   const step = (Math.PI * 2) / ITEMS.length;
   const offset = -idx * step;
   const x = useMotionValue(0);
@@ -30,17 +30,22 @@ function OrbitItem({ idx, angle, size, pausedRef, selected, onSelect, onOpen }) 
     }
   }, [selected, x, y]);
 
+  const item = ITEMS[idx];
+  const ringColor = (CAT_STYLE[item.category] || ['#fff0f3', '#e11d48'])[0];
+
   return (
     <motion.button
       type="button"
-      data-testid={`orbit-product-${ITEMS[idx].id}`}
-      onClick={() => (selected ? onOpen(ITEMS[idx]) : onSelect(idx))}
+      data-testid={`orbit-product-${item.id}`}
+      onClick={() => (selected ? onOpen(item, idx) : onSelect(idx))}
       onMouseEnter={() => onSelect(idx)}
       style={{ x, y, zIndex: selected ? 30 : Math.round(y.get()) + 10 }}
-      className="absolute left-1/2 top-1/2 -ml-11 -mt-11 grid h-[88px] w-[88px] place-items-center rounded-full bg-white p-2 shadow-[0_18px_36px_-20px_rgba(32,26,23,0.45)] transition-transform duration-300 hover:scale-110"
-      aria-label={ITEMS[idx].name}
+      className="absolute left-1/2 top-1/2 -ml-12 -mt-12 grid h-24 w-24 place-items-center rounded-full bg-white p-1.5 shadow-[0_18px_36px_-20px_rgba(32,26,23,0.45)] transition-transform duration-300 hover:scale-110"
+      aria-label={item.name}
     >
-      <SmartImage img={ITEMS[idx].img} alt={ITEMS[idx].name} sizes="88px" className="rounded-full" />
+      <div className="grid h-full w-full place-items-center overflow-hidden rounded-full" style={{ border: `3px solid ${ringColor}` }}>
+        <SmartImage img={item.img} alt={item.name} sizes="88px" className="rounded-full" />
+      </div>
     </motion.button>
   );
 }
@@ -66,6 +71,10 @@ function OrbitDesk({ onOpen }) {
     return () => window.removeEventListener('resize', measure);
   }, []);
 
+  useEffect(() => {
+    if (selected !== null) prefetchAround(ITEMS, selected, '640');
+  }, [selected]);
+
   const cur = selected !== null ? ITEMS[selected] : null;
 
   return (
@@ -90,11 +99,14 @@ function OrbitDesk({ onOpen }) {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.7, opacity: 0 }}
               transition={{ type: 'spring', stiffness: 240, damping: 24 }}
-              className="z-20 flex w-60 flex-col items-center gap-2 text-center"
+              className="z-20 flex w-64 flex-col items-center gap-2 text-center"
               data-testid="orbit-center-product"
             >
-              <div className="w-28 rounded-[24px] bg-white p-2 shadow-lg" style={{ background: (CAT_STYLE[cur.category] || ['#fff0f3'])[0] }}>
-                <SmartImage img={cur.img} alt={cur.name} sizes="112px" className="rounded-2xl" />
+              <div
+                className="w-32 rounded-[24px] p-2 shadow-lg"
+                style={{ background: (CAT_STYLE[cur.category] || ['#fff0f3'])[0] }}
+              >
+                <SmartImage img={cur.img} alt={cur.name} sizes="128px" className="rounded-2xl" />
               </div>
               <span className="font-display text-2xl leading-none text-[#201a17]">{cur.name}</span>
               <span
@@ -105,7 +117,7 @@ function OrbitDesk({ onOpen }) {
               </span>
               <button
                 type="button"
-                onClick={() => onOpen(cur)}
+                onClick={() => onOpen(cur, selected)}
                 data-testid="orbit-open-product"
                 className="mt-1 rounded-full bg-[#ED1B26] px-5 py-2 text-xs font-bold text-white transition hover:bg-[#C4121B]"
               >
@@ -156,9 +168,9 @@ function OrbitMobile({ onOpen }) {
         <button
           key={p.id}
           type="button"
-          onClick={() => onOpen(p)}
+          onClick={() => onOpen(p, ITEMS.indexOf(p))}
           data-testid={`orbit-mobile-product-${p.id}`}
-          className="w-44 shrink-0 snap-center rounded-[26px] bg-white p-3 text-right shadow-[0_18px_36px_-26px_rgba(32,26,23,0.4)]"
+          className="w-48 shrink-0 snap-center rounded-[26px] bg-white p-3 text-right shadow-[0_18px_36px_-26px_rgba(32,26,23,0.4)]"
         >
           <div className="rounded-[18px] p-2.5" style={{ background: (CAT_STYLE[p.category] || ['#fff0f3'])[0] }}>
             <SmartImage img={p.img} alt={p.name} sizes="176px" />
@@ -191,8 +203,8 @@ export default function ProductOrbit() {
           </h2>
         </div>
         <div className="mt-12">
-          <OrbitDesk onOpen={setModal} />
-          <OrbitMobile onOpen={setModal} />
+          <OrbitDesk onOpen={(p) => setModal(p)} />
+          <OrbitMobile onOpen={(p) => setModal(p)} />
         </div>
       </div>
       <ProductModal product={modal} onClose={() => setModal(null)} />

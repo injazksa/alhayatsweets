@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import SmartImage from './SmartImage';
@@ -33,11 +33,23 @@ const SPRINKLES = [
 
 export default function Hero() {
   const ref = useRef(null);
+  const collageRef = useRef(null);
   const reduce = useReducedMotion();
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const yMain = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 70]);
   const yA = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 130]);
   const yB = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 45]);
+
+  // gentle 3D tilt on the product composition (mouse pointers only)
+  const onTilt = (e) => {
+    if (reduce || !collageRef.current) return;
+    const rect = collageRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: py * -6, y: px * 8 });
+  };
+  const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
     <section id="home" ref={ref} data-testid="hero-section" className="relative overflow-hidden pb-20 pt-24 sm:pt-28 lg:pb-28 lg:pt-36">
@@ -106,35 +118,53 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* floating product collage */}
-        <div className="relative lg:col-span-6">
-          <div className="relative mx-auto h-[430px] max-w-[560px] sm:h-[520px]">
-            <motion.div style={{ y: yMain }} className="absolute inset-x-0 top-6 z-10 mx-auto w-[76%]">
+        {/* product constellation — responds subtly to the pointer */}
+        <div className="relative lg:col-span-6" style={{ perspective: '1000px' }}>
+          <motion.div
+            ref={collageRef}
+            onMouseMove={onTilt}
+            onMouseLeave={resetTilt}
+            animate={{ rotateX: tilt.x, rotateY: tilt.y }}
+            transition={{ type: 'spring', stiffness: 110, damping: 16 }}
+            className="relative mx-auto h-[430px] max-w-[560px] sm:h-[540px]"
+            data-testid="hero-collage"
+          >
+            {/* orbit rings behind the composition */}
+            <div
+              className="animate-spin-slow absolute left-1/2 top-1/2 h-[112%] w-[112%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-dashed border-[#ED1B26]/15"
+              aria-hidden="true"
+            />
+            <div
+              className="absolute left-1/2 top-1/2 h-[86%] w-[86%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0284C7]/10"
+              aria-hidden="true"
+            />
+
+            <motion.div style={{ y: yMain }} className="absolute inset-x-0 top-4 z-10 mx-auto w-[84%]">
               <div className="floaty" style={{ '--dur': '7s' }}>
                 <div
-                  className="overflow-hidden bg-[#FFF0F3] p-6 shadow-[0_30px_60px_-30px_rgba(32,26,23,0.35)]"
+                  className="overflow-hidden bg-[#FFF0F3] p-7 shadow-[0_36px_70px_-34px_rgba(32,26,23,0.4)]"
                   style={{ borderRadius: '58% 42% 55% 45% / 48% 52% 48% 52%' }}
                 >
-                  <SmartImage img={HERO.main} alt="يوبو ميتر – أشرطة الجيلي بنكهات متعددة" eager sizes="(max-width: 1024px) 70vw, 380px" />
+                  <SmartImage img={HERO.main} alt="يوبو ميتر – أشرطة الجيلي بنكهات متعددة" eager sizes="(max-width: 1024px) 70vw, 420px" />
                 </div>
               </div>
             </motion.div>
 
-            <motion.div style={{ y: yA }} className="absolute -top-2 right-[2%] z-20 w-32 sm:w-44">
-              <div className="floaty rounded-[26px] bg-white p-2.5 shadow-[0_24px_45px_-24px_rgba(32,26,23,0.4)]" style={{ '--tilt': '-5deg', '--dur': '6s' }}>
-                <SmartImage img={HERO.floatA} alt="بوفي مارشميلو" eager sizes="(max-width: 1024px) 30vw, 170px" className="rounded-[18px]" />
+            <motion.div style={{ y: yA }} className="absolute -top-3 right-[1%] z-20 w-36 sm:w-48">
+              <div className="floaty rounded-[26px] bg-white p-2.5 shadow-[0_28px_50px_-26px_rgba(32,26,23,0.45)]" style={{ '--tilt': '-5deg', '--dur': '6s' }}>
+                <SmartImage img={HERO.floatA} alt="بوفي مارشميلو" eager sizes="(max-width: 1024px) 30vw, 180px" className="rounded-[18px]" />
               </div>
             </motion.div>
 
-            <motion.div style={{ y: yB }} className="absolute bottom-2 left-[2%] z-20 w-28 sm:w-40">
-              <div className="floaty rounded-[26px] bg-white p-2.5 shadow-[0_24px_45px_-24px_rgba(32,26,23,0.4)]" style={{ '--tilt': '4deg', '--dur': '8s' }}>
-                <SmartImage img={HERO.floatB} alt="مصاصات بنكهات مشكلة" eager sizes="(max-width: 1024px) 28vw, 150px" className="rounded-[18px]" />
+            <motion.div style={{ y: yB }} className="absolute -bottom-2 left-[1%] z-20 w-32 sm:w-44">
+              <div className="floaty rounded-[26px] bg-white p-2.5 shadow-[0_28px_50px_-26px_rgba(32,26,23,0.45)]" style={{ '--tilt': '4deg', '--dur': '8s' }}>
+                <SmartImage img={HERO.floatB} alt="مصاصات بنكهات مشكلة" eager sizes="(max-width: 1024px) 28vw, 165px" className="rounded-[18px]" />
               </div>
             </motion.div>
 
-            <Squiggle color="#ED1B26" className="absolute -left-2 top-[6%] w-24 opacity-70 sm:w-32" />
-            <Squiggle color="#16A34A" className="absolute bottom-[2%] right-[10%] w-20 rotate-180 opacity-60 sm:w-24" />
-          </div>
+            <Squiggle color="#ED1B26" className="absolute -left-2 top-[4%] w-24 opacity-70 sm:w-32" />
+            <Squiggle color="#16A34A" className="absolute bottom-0 right-[8%] w-20 rotate-180 opacity-60 sm:w-24" />
+          </motion.div>
         </div>
       </div>
 

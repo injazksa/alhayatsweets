@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
-import { animate, motion, useMotionValue } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { AnimatePresence, animate, motion, useMotionValue } from 'framer-motion';
+import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import SmartImage from './SmartImage';
 import { CAMPAIGNS } from '../data/catalog';
 import { CandyCurve } from './Decor';
+import { prefetchAround } from '../utils';
 
 const GAP = 20;
 
 export default function Campaigns() {
   const [idx, setIdx] = useState(1);
   const [m, setM] = useState({ vw: 1200, sw: 640 });
+  const [zoom, setZoom] = useState(null);
   const vpRef = useRef(null);
-  const slideRef = useRef(null);
   const x = useMotionValue(0);
 
   const total = CAMPAIGNS.length;
@@ -20,7 +21,7 @@ export default function Campaigns() {
   useEffect(() => {
     const measure = () => {
       const vw = vpRef.current ? vpRef.current.offsetWidth : window.innerWidth;
-      const ratio = vw >= 1024 ? 0.44 : vw >= 640 ? 0.58 : 0.82;
+      const ratio = vw >= 1024 ? 0.56 : vw >= 640 ? 0.72 : 0.86;
       setM({ vw, sw: Math.round(vw * ratio) });
     };
     measure();
@@ -35,8 +36,20 @@ export default function Campaigns() {
 
   useEffect(() => {
     animate(x, snapX(idx), { type: 'spring', stiffness: 190, damping: 30 });
+    prefetchAround(CAMPAIGNS, idx, '640');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idx, m]);
+
+  useEffect(() => {
+    if (!zoom) return;
+    const onKey = (e) => e.key === 'Escape' && setZoom(null);
+    document.addEventListener('keydown', onKey);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
+    };
+  }, [zoom]);
 
   const go = (d) => setIdx((a) => Math.min(total - 1, Math.max(0, a + d)));
   const onDragEnd = (e, info) => {
@@ -45,10 +58,20 @@ export default function Campaigns() {
     setIdx(Math.min(total - 1, Math.max(0, next)));
   };
 
+  const activeTint = CAMPAIGNS[idx].tint;
+
   return (
-    <section id="ads" data-testid="campaigns-section" className="relative bg-white pb-28 pt-20 lg:pt-24">
+    <section id="ads" data-testid="campaigns-section" className="relative overflow-hidden bg-white pb-28 pt-20 lg:pt-24">
       <CandyCurve fill="#ffffff" className="absolute -top-1 left-0 right-0" />
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ambient glow influenced by the active campaign color */}
+      <motion.div
+        aria-hidden="true"
+        animate={{ backgroundColor: activeTint }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="pointer-events-none absolute left-1/2 top-[46%] h-[560px] w-[120vw] -translate-x-1/2 rounded-full opacity-45 blur-3xl"
+      />
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div className="max-w-xl">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold text-[#ED1B26]">
@@ -59,7 +82,7 @@ export default function Campaigns() {
               حملات صرخت بالألوان
             </h2>
             <p className="mt-3 text-base leading-relaxed text-[#5c544e]">
-              من إبداعاتنا الدعائية لمنتجاتنا — اسحب وشوف الحملة اللي بتعجبك.
+              من إبداعاتنا الدعائية لمنتجاتنا — اسحب، واضغط على الحملة لتشوفها بالكامل.
             </p>
           </div>
           <div className="flex items-center gap-4">
@@ -72,7 +95,7 @@ export default function Campaigns() {
                 onClick={() => go(1)}
                 aria-label="الحملة التالية"
                 data-testid="campaigns-next-button"
-                className="grid h-12 w-12 place-items-center rounded-full bg-[#FAF8F5] text-[#201a17] shadow transition hover:bg-[#ED1B26] hover:text-white"
+                className="grid h-12 w-12 place-items-center rounded-full bg-white text-[#201a17] shadow transition hover:bg-[#ED1B26] hover:text-white"
               >
                 <ChevronLeft size={20} />
               </button>
@@ -81,7 +104,7 @@ export default function Campaigns() {
                 onClick={() => go(-1)}
                 aria-label="الحملة السابقة"
                 data-testid="campaigns-prev-button"
-                className="grid h-12 w-12 place-items-center rounded-full bg-[#FAF8F5] text-[#201a17] shadow transition hover:bg-[#ED1B26] hover:text-white"
+                className="grid h-12 w-12 place-items-center rounded-full bg-white text-[#201a17] shadow transition hover:bg-[#ED1B26] hover:text-white"
               >
                 <ChevronRight size={20} />
               </button>
@@ -105,28 +128,27 @@ export default function Campaigns() {
             return (
               <div
                 key={c.id}
-                ref={i === 0 ? slideRef : undefined}
                 dir="rtl"
                 style={{ width: m.sw || undefined }}
-                className={`shrink-0 ${isActive ? '' : 'cursor-pointer'}`}
-                onClick={() => !isActive && setIdx(i)}
+                className={`shrink-0 ${isActive ? 'cursor-zoom-in' : 'cursor-pointer'}`}
+                onClick={() => (isActive ? setZoom(c) : setIdx(i))}
                 data-testid={`campaign-card-${c.id}`}
               >
                 <motion.div
-                  animate={{ scale: isActive ? 1 : 0.93, opacity: isActive ? 1 : 0.55 }}
+                  animate={{ scale: isActive ? 1 : 0.94, opacity: isActive ? 1 : 0.6 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 28 }}
-                  className="overflow-hidden rounded-[30px] p-4 shadow-[0_30px_60px_-36px_rgba(32,26,23,0.5)]"
+                  className="overflow-hidden rounded-[30px] p-4 shadow-[0_40px_80px_-44px_rgba(32,26,23,0.55)]"
                   style={{ background: c.tint }}
                 >
                   <SmartImage
                     img={c.img}
                     alt={`الحملة الإعلانية: ${c.name} — ${c.note}`}
-                    sizes="(max-width: 640px) 82vw, (max-width: 1024px) 58vw, 44vw"
+                    sizes="(max-width: 640px) 86vw, (max-width: 1024px) 72vw, 56vw"
                     className="rounded-[20px]"
                     eager={i >= 1 && i <= 3}
                   />
-                  <div className="flex items-center justify-between gap-3 px-2 pb-1.5 pt-3">
-                    <span className="font-display text-lg leading-none text-[#201a17]">{c.name}</span>
+                  <div className="flex items-center justify-between gap-3 px-2 pb-1.5 pt-3.5">
+                    <span className="font-display text-xl leading-none text-[#201a17]">{c.name}</span>
                     <span className="text-[11px] font-semibold text-[#8a8178]">{c.note}</span>
                   </div>
                 </motion.div>
@@ -137,7 +159,7 @@ export default function Campaigns() {
       </div>
 
       {/* progress bar */}
-      <div className="mx-auto mt-8 h-1 w-40 max-w-[60%] overflow-hidden rounded-full bg-[#EDE7DE]">
+      <div className="relative mx-auto mt-8 h-1 w-40 max-w-[60%] overflow-hidden rounded-full bg-white shadow-sm">
         <motion.div
           className="h-full rounded-full bg-[#ED1B26]"
           animate={{ width: `${((idx + 1) / total) * 100}%` }}
@@ -145,6 +167,54 @@ export default function Campaigns() {
           data-testid="campaigns-progress"
         />
       </div>
+
+      {/* immersive lightbox — the campaign expands to full presentation */}
+      <AnimatePresence>
+        {zoom && (
+          <motion.div
+            key="lightbox"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[90] grid place-items-center bg-[#201a17]/92 p-4 backdrop-blur-sm"
+            onClick={() => setZoom(null)}
+            data-testid="campaign-lightbox"
+          >
+            <motion.div
+              initial={{ scale: 0.86, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 16, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 240, damping: 26 }}
+              className="relative max-h-[92vh]"
+              onClick={(e) => e.stopPropagation()}
+              data-testid="campaign-lightbox-panel"
+            >
+              <SmartImage
+                img={zoom.img}
+                alt={`الحملة الإعلانية: ${zoom.name}`}
+                sizes="94vw"
+                eager
+                natural
+                className="rounded-[24px]"
+                imgClassName="max-h-[78vh] w-auto max-w-[92vw]"
+              />
+              <div className="mt-3 flex items-center justify-between gap-4 text-white">
+                <span className="font-display text-2xl">{zoom.name}</span>
+                <span className="text-xs text-white/80">{zoom.note}</span>
+              </div>
+            </motion.div>
+            <button
+              type="button"
+              onClick={() => setZoom(null)}
+              aria-label="إغلاق العرض"
+              data-testid="campaign-lightbox-close"
+              className="absolute left-5 top-5 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition hover:bg-[#ED1B26]"
+            >
+              <X size={20} />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

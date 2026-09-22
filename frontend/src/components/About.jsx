@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import SmartImage from './SmartImage';
-import { Sprinkles, Blob, CandyCurve } from './Decor';
+import { Sprinkles, Blob, CandyCurve, CandyTrail } from './Decor';
 import { HERO } from '../data/catalog';
 import { COMPANY } from '../data/company';
 
@@ -98,6 +98,9 @@ export default function About() {
           </motion.div>
         </div>
       </div>
+
+      {/* candy trail leading to the next chapter */}
+      <CandyTrail color="#ED1B26" className="mt-16" />
     </section>
   );
 }

@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import SmartImage from './SmartImage';
 import { PRODUCTS, CAT_STYLE } from '../data/catalog';
 import { CandyCurve } from './Decor';
+import { prefetchAround } from '../utils';
 
 const CARD_W = 224;
 const GAP = 24;
@@ -32,6 +33,7 @@ export default function ProductRail() {
 
   useEffect(() => {
     animate(x, snapX(active), { type: 'spring', stiffness: 200, damping: 30 });
+    prefetchAround(PRODUCTS, active, '480');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active, vw]);
 

@@ -56,8 +56,9 @@ export default function ProductModal({ product, onClose }) {
               <SmartImage
                 img={product.img}
                 alt={product.name}
-                sizes="(max-width: 768px) 90vw, 320px"
-                className="w-full max-w-[300px] rounded-3xl"
+                eager
+                sizes="(max-width: 768px) 90vw, 340px"
+                className="w-full max-w-[320px] rounded-3xl"
               />
             </div>
 

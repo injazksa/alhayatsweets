@@ -11,7 +11,8 @@ export const CAT_STYLE = {
   'شوكولاتة': ['#f7efe6', '#7c4a21'],
   'مارشميلو': ['#faf5ff', '#9333ea'],
   'علكة': ['#f0f9ff', '#0284c7'],
-  'حلوى ونعناع': ['#f0fdf4', '#15803d'],
+  'نعناع': ['#f0fdf4', '#15803d'],
+  'حلوى': ['#ffedd5', '#c2410c'],
   'مصاصات': ['#fefce8', '#a16207'],
   'زينة كيك': ['#fdf2f8', '#db2777'],
 };
@@ -23,31 +24,33 @@ export const CATEGORIES = [
   'شوكولاتة',
   'مارشميلو',
   'علكة',
-  'حلوى ونعناع',
+  'نعناع',
+  'حلوى',
   'مصاصات',
   'زينة كيك',
 ];
 
+// كل البيانات مطابقة لكتابالوصف على العبوات في كتالوج الشركة المرفق
 export const PRODUCTS = [
-  { id: 'yupo-piton', name: 'يوبو بيتون', category: 'جيلي', tags: ['بعصير فواكه', 'بدون جلوتين'], img: img(P, 'yupo-piton') },
+  { id: 'yupo-piton', name: 'يوبو بيتون', category: 'جيلي', tags: ['فراولة وتفاح وليمون'], img: img(P, 'yupo-piton') },
   { id: 'ulker-toffee', name: 'أولكر توفي', category: 'توفي', tags: ['كاراميل'], img: img(P, 'ulker-toffee') },
   { id: 'yupo-worms', name: 'يوبو وورمز', category: 'جيلي', tags: ['بعصير فواكه'], img: img(P, 'yupo-worms') },
-  { id: 'povi-marshmallow', name: 'بوفي مارشميلو', category: 'مارشميلو', tags: ['بدون جلوتين'], img: img(P, 'povi-marshmallow') },
+  { id: 'povi-marshmallow', name: 'بوفي مارشميلو', category: 'مارشميلو', tags: ['فراولة وفانيليا', 'بدون جلوتين'], img: img(P, 'povi-marshmallow') },
   { id: 'bucuria-toffee', name: 'بوكوريا توفي', category: 'توفي', tags: ['بحشوة فواكه'], img: img(P, 'bucuria-toffee') },
   { id: 'yupo-meter', name: 'يوبو ميتر', category: 'جيلي', tags: ['نكهات متعددة'], img: img(P, 'yupo-meter') },
   { id: 'oneo-gum', name: 'أونيو علكة', category: 'علكة', tags: ['نكهات متعددة'], img: img(P, 'oneo-gum') },
   { id: 'oneo-bubble', name: 'أونيو بابل ميلك شيك', category: 'علكة', tags: ['فراولة وموز'], img: img(P, 'oneo-bubble') },
-  { id: 'ofresh', name: 'أوفريش', category: 'حلوى ونعناع', tags: ['طبقات فواكه'], img: img(P, 'ofresh') },
+  { id: 'ofresh', name: 'أوفريش', category: 'حلوى', tags: ['طبقات ملوّنة'], img: img(P, 'ofresh') },
   { id: 'pops-lollipops', name: "مصاصات POP'S", category: 'مصاصات', tags: ['نكهات مشكّلة'], img: img(P, 'pops-lollipops') },
   { id: 'yupo-sour-meter', name: 'يوبو ساور ميتر', category: 'جيلي', tags: ['نكهة حامضة'], img: img(P, 'yupo-sour-meter') },
   { id: 'cake-sprinkles', name: 'زينة الكيك', category: 'زينة كيك', tags: ['ألوان زاهية'], img: img(P, 'cake-sprinkles') },
   { id: 'choco-pako', name: 'شوكو باكو فول سوداني', category: 'شوكولاتة', tags: ['فول سوداني'], img: img(P, 'choco-pako') },
-  { id: 'yupo-tubs', name: 'يوبو هابي ميكس', category: 'جيلي', tags: ['بعصير فواكه'], img: img(P, 'yupo-tubs') },
-  { id: 'cool-mint', name: 'كول مينت بدون سكر', category: 'حلوى ونعناع', tags: ['بدون سكر'], img: img(P, 'cool-mint') },
+  { id: 'yupo-tubs', name: 'تشكيلة يوبو', category: 'جيلي', tags: ['بعصير فواكه', 'حلال'], img: img(P, 'yupo-tubs') },
+  { id: 'cool-mint', name: 'كول مينت بدون سكر', category: 'نعناع', tags: ['بدون سكر'], img: img(P, 'cool-mint') },
   { id: 'choco-waffle', name: 'شوكو وافل بندق', category: 'شوكولاتة', tags: ['بندق'], img: img(P, 'choco-waffle') },
   { id: 'drops-bon', name: 'دروبس بون', category: 'شوكولاتة', tags: ['شوكولاتة مغلفة'], img: img(P, 'drops-bon') },
   { id: 'yupo-rencils', name: 'يوبو رينسيلز', category: 'جيلي', tags: ['أصابع فواكه'], img: img(P, 'yupo-rencils') },
-  { id: 'sarar-chocolate', name: 'سارار شوكولاتة', category: 'شوكولاتة', tags: ['شوكولاتة'], img: img(P, 'sarar-chocolate') },
+  { id: 'sarar-chocolate', name: 'سارار شوكولاتة', category: 'شوكولاتة', tags: [], img: img(P, 'sarar-chocolate') },
 ];
 
 const CAMPAIGN_TINTS = ['#fff0f3', '#f0f9ff', '#f0fdf4', '#fefce8', '#faf5ff', '#fff7e8'];

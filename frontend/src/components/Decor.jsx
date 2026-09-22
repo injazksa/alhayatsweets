@@ -1,3 +1,6 @@
+import { motion } from 'framer-motion';
+
+/**
 /**
  * Candy visual language: blobs, sprinkles, squiggles and section-curve
  * separators — all derived from the brand's candy shapes, pure SVG/CSS.
@@ -78,6 +81,46 @@ export function Squiggle({ color = '#ED1B26', className = '', style }) {
         strokeDasharray="1 10"
       />
     </svg>
+  );
+}
+
+/** Candy trail: a dotted path with candy pieces that draws itself on scroll —
+ * used as a connector between selected sections. */
+export function CandyTrail({ color = '#ED1B26', flip = false, className = '' }) {
+  return (
+    <div className={`pointer-events-none relative mx-auto h-20 w-full max-w-2xl ${className}`} aria-hidden="true">
+      <svg viewBox="0 0 600 80" fill="none" className="h-full w-full" style={flip ? { transform: 'scaleX(-1)' } : undefined}>
+        <motion.path
+          d="M8 58 C 110 6, 210 84, 310 42 S 500 8, 592 50"
+          stroke={color}
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeDasharray="2 13"
+          opacity="0.55"
+          initial={{ pathLength: 0 }}
+          whileInView={{ pathLength: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.5, ease: 'easeOut' }}
+        />
+        {[
+          { x: 150, y: 34, c: '#FF4D6D', r: 7 },
+          { x: 330, y: 44, c: '#0284C7', r: 6 },
+          { x: 500, y: 26, c: '#F5B301', r: 7 },
+        ].map((d, i) => (
+          <motion.circle
+            key={i}
+            cx={d.x}
+            cy={d.y}
+            r="0"
+            fill={d.c}
+            initial={{ r: 0, opacity: 0 }}
+            whileInView={{ r: d.r, opacity: 0.85 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.5, delay: 0.5 + i * 0.25, type: 'spring', stiffness: 220, damping: 16 }}
+          />
+        ))}
+      </svg>
+    </div>
   );
 }
 
