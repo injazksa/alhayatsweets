@@ -1,0 +1,13 @@
+[build]
+  base = "frontend/"
+  command = "yarn build"
+  publish = "build"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA: any path serves the app shell
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

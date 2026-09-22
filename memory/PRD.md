@@ -41,6 +41,13 @@
 - اختيار المنتج فوري (prefetch + LQIP) ✓
 - الحملات أكبر + Lightbox يحفظ كامل النص العربي ✓
 
+## النشر على Netlify (2026-09-22)
+- المشكلة: الموقع المنشور كان 404 فارغ — لا يوجد إعداد بناء فلم يُنشر شيء
+- الحل: /app/netlify.toml (base=frontend، yarn build، publish=build، Node 20، SPA redirect)
+- البناء الإنتاجي مُختبر: CI=true yarn build نجح (142KB JS + chunks)، كل الأصول داخل build/، والبناء يعمل بدون overflow
+- deployment_agent: لا يوجد مانع نشر (الموقع لا يحتاج env — البناء ينجح بدون .env)
+- بديل السحب والإفلات: مجلد /app/frontend/build جاهز للسحب مباشرة إلى Netlify Deploys
+
 ## Verified
 - Desktop 1440 + Mobile 390 لقطات كاملة — بدون overflow أفقي، بدون صور مكسورة
 - تفاعلات مختبرة: فلترة، مودال، أسهم الكاروسيل، قائمة الجوال
