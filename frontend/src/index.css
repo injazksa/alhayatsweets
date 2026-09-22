@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --red: #ed1b26;
+  --red-deep: #c4121b;
+  --cream: #faf8f5;
+  --cream-2: #f3efe9;
+  --ink: #201a17;
+  --ink-soft: #5c544e;
+  --pink: #ff4d6d;
+  --pink-bg: #fff0f3;
+  --green: #16a34a;
+  --green-bg: #f0fdf4;
+  --blue: #0284c7;
+  --blue-bg: #f0f9ff;
+  --yellow: #ca8a04;
+  --yellow-bg: #fefce8;
+  --purple: #9333ea;
+  --purple-bg: #faf5ff;
+  --cocoa: #7c4a21;
+  --cocoa-bg: #f7efe6;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Alexandria', 'Readex Pro', system-ui, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: clip;
+}
+
+.font-display {
+  font-family: 'Lalezar', 'Alexandria', sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+::selection { background: var(--red); color: #fff; }
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* subtle paper grain over the whole page */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+.num-ltr {
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
+/* slow editorial marquee */
+@keyframes marquee-rtl {
+  from { transform: translateX(0); }
+  to { transform: translateX(50%); }
+}
+.marquee-track { animation: marquee-rtl 36s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* gentle float for hero objects */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(var(--tilt, 0deg)); }
+  50% { transform: translateY(-12px) rotate(calc(var(--tilt, 0deg) * -0.6)); }
+}
+.floaty { animation: floaty var(--dur, 6s) ease-in-out infinite; }
+
+/* scroll cue */
+@keyframes cue-dip {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  55% { transform: translateY(7px); opacity: 0.45; }
+}
+.cue-dip { animation: cue-dip 1.8s ease-in-out infinite; }
+
+/* hide scrollbars on chip rows / rails */
+.no-bar::-webkit-scrollbar { display: none; }
+.no-bar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .marquee-track, .floaty, .cue-dip { animation: none !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}

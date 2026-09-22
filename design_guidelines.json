@@ -1,0 +1,229 @@
+{
+  "project_title": "شركة الحياة للاستيراد والتسويق (Al-Hayat Co. for Sweets, Import and Marketing)",
+  "context": {
+    "type": "MARKETING_PAGE",
+    "target_audience": "Palestinian consumers, families, children, sweet tooth enthusiasts, retail merchants, distributors, and business partners across Palestine",
+    "location": "جنين، فلسطين (Jenin, Palestine)",
+    "tone": "Premium, Playful, Commercial, Fast, Interactive, Human-Designed, Warm, Authentic",
+    "theme": "Light theme foundation (Warm Cream / Off-White background) with vibrant candy accents"
+  },
+  "typography": {
+    "direction": "rtl",
+    "display_font": {
+      "name": "Lalezar",
+      "import_url": "https://fonts.googleapis.com/css2?family=Lalezar&family=Alexandria:wght@300;400;500;600;700;800;900&display=swap",
+      "usage": "Hero headlines, section titles, marquee text, highlight badges, primary stats",
+      "fallback": "'Tajawal', 'Cairo', sans-serif"
+    },
+    "body_font": {
+      "name": "Alexandria",
+      "usage": "Subtitles, body text, product descriptions, merchant contact cards, navigation links, buttons, footer",
+      "weights": [300, 400, 500, 600, 700, 800],
+      "fallback": "'Readex Pro', 'Segoe UI', sans-serif"
+    },
+    "hierarchy": {
+      "h1_hero": "text-4xl sm:text-5xl lg:text-6xl font-display font-normal leading-[1.15] tracking-tight text-neutral-900",
+      "h2_section": "text-3xl sm:text-4xl lg:text-5xl font-display font-normal leading-tight text-neutral-900",
+      "h3_card": "text-xl sm:text-2xl font-body font-bold text-neutral-900",
+      "subtitle": "text-base sm:text-lg lg:text-xl font-body font-normal text-neutral-600 leading-relaxed",
+      "body": "text-base font-body text-neutral-700 leading-relaxed",
+      "caption_label": "text-xs sm:text-sm font-body font-semibold tracking-wider uppercase text-neutral-500"
+    }
+  },
+  "colors": {
+    "brand_primary": {
+      "hex": "#ED1B26",
+      "name": "الحياة أحمر (Al-Hayat Red)",
+      "usage": "Primary CTA buttons, active state indicators, logo accent, highlight banners, primary brand touchpoints"
+    },
+    "brand_primary_dark": {
+      "hex": "#C4121B",
+      "name": "أحمر داكن (Deep Red)",
+      "usage": "Button hover states, dark contrast accents"
+    },
+    "foundation": {
+      "bg_main": "#FAF8F5",
+      "bg_card": "#FFFFFF",
+      "bg_subtle": "#F3EFEA",
+      "bg_dark_footer": "#18181B",
+      "text_main": "#1C1917",
+      "text_muted": "#57534E",
+      "border": "#E7E5E4"
+    },
+    "candy_accents": {
+      "strawberry_pink": {
+        "bg": "#FFF0F3",
+        "border": "#FFCCD5",
+        "accent": "#FF4D6D",
+        "tag": "جيلي / توفي"
+      },
+      "fruit_green": {
+        "bg": "#F0FDF4",
+        "border": "#BBF7D0",
+        "accent": "#16A34A",
+        "tag": "نعناع / فواكه"
+      },
+      "sky_blue": {
+        "bg": "#F0F9FF",
+        "border": "#BAE6FD",
+        "accent": "#0284C7",
+        "tag": "علكة / انتعاش"
+      },
+      "sunshine_yellow": {
+        "bg": "#FEFCE8",
+        "border": "#FEF08A",
+        "accent": "#CA8A04",
+        "tag": "مصاصات / ليمون"
+      },
+      "grape_purple": {
+        "bg": "#FAF5FF",
+        "border": "#E9D5FF",
+        "accent": "#9333EA",
+        "tag": "مارشميلو / كيك"
+      },
+      "rich_cocoa": {
+        "bg": "#FFFBEB",
+        "border": "#FDE68A",
+        "accent": "#78350F",
+        "tag": "شوكولاتة"
+      }
+    }
+  },
+  "spacing_and_layout": {
+    "container_max_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_padding": "py-16 sm:py-24 lg:py-32",
+    "asymmetry_rules": [
+      "Avoid 3x3 identical grids. Use mixed span ratios: Hero grid 7:5, Feature cards 8:4 or 4:8, staggered product cards.",
+      "Containers with borders MUST have internal padding p-6 or p-8 to prevent text/image border collision.",
+      "Hero and key highlight sections use organic SVG candy shapes and subtle floating blobs behind transparent product cutouts."
+    ]
+  },
+  "motion_and_interactions": {
+    "engine": "Framer Motion + Lenis (smooth momentum scroll)",
+    "section_reveal": "Fade up with y: 30, duration: 0.6s, ease: [0.22, 1, 0.36, 1]",
+    "hero_headline_reveal": "Masked line-by-line clip-path reveal on page load",
+    "circular_orbit": {
+      "type": "Interactive Rotating Product Universe",
+      "description": "Products revolve smoothly around a center brand hub. Hovering or clicking a product pauses orbit, enlarges the active product, and displays product details with CTA. Touch drag enabled on mobile."
+    },
+    "draggable_rail": "Horizontal smooth drag carousel with snap points and active scale effect",
+    "campaigns_carousel": "Large visual slider showing real ad creatives without cropping faces/text (object-contain / object-cover with soft backdrop)",
+    "prefers_reduced_motion": "All motion transitions switch to simple opacities when prefers-reduced-motion is true"
+  },
+  "page_structure_sections": [
+    {
+      "id": "nav",
+      "title": "Sticky Header Navigation",
+      "description": "Right-aligned logo, 6 main navigation links (الرئيسية، من نحن، منتجاتنا، إعلاناتنا، للتجار والموزعين، تواصل معنا), brand red CTA button, header height compresses with backdrop-blur glass effect on scroll.",
+      "test_id": "nav-container"
+    },
+    {
+      "id": "hero",
+      "title": "Immersive Brand Hero",
+      "description": "Dynamic headline 'الحياة أحلى مع الحلو', concise subtext, dual CTAs (استكشف منتجاتنا / تواصل معنا), floating real product cutouts with gentle floating physics, background organic candy shapes, scroll invitation 'اسحب لاكتشاف عالمنا'.",
+      "test_id": "hero-section"
+    },
+    {
+      "id": "product-rail",
+      "title": "Horizontal Product Discovery Rail",
+      "description": "Draggable product showcase with center focal product scaled up, prev/next controls, and product category badge overlay.",
+      "test_id": "product-rail-section"
+    },
+    {
+      "id": "circular-orbit",
+      "title": "Signature Circular Orbit ('اكتشف عالم الحياة')",
+      "description": "Center focal Al-Hayat badge surrounded by orbiting product items. Interactive selection updates central view with live image, title, category, and taste profile.",
+      "test_id": "circular-orbit-section"
+    },
+    {
+      "id": "about",
+      "title": "About Us ('من نحن')",
+      "description": "Editorial layout highlighting Al-Hayat Co. in Jenin, Palestine. Factual 3-chapter breakdown (01 استيراد، 02 تسويق، 03 توزيع) and exact address 'جنين - شارع حيفا، بجانب بئر السعادة'.",
+      "test_id": "about-section"
+    },
+    {
+      "id": "category-filter",
+      "title": "Interactive Product Catalog & Filters",
+      "description": "Category pills (الكل، جيلي، توفي، شوكولاتة، مارشميلو، علكة، نعناع، مصاصات، زينة كيك) with smooth animated filtering, asymmetric card sizing (Feature large cards mixed with standard cards), product details modal ('شاهد المنتج').",
+      "test_id": "category-filter-section"
+    },
+    {
+      "id": "campaigns",
+      "title": "Real Campaigns & Ads ('إعلاناتنا وحملاتنا')",
+      "description": "Horizontal swipeable/draggable carousel displaying real high-res advertisement posters without cropping text or faces.",
+      "test_id": "campaigns-section"
+    },
+    {
+      "id": "merchants",
+      "title": "For Merchants & Distributors ('للتجار والموزعين')",
+      "description": "Dedicated section for wholesale partners with 4 regional sales reps (الخليل، طولكرم وقلقيلية وسلفيت، رام الله وقراها، نابلس وجنين) with direct call links and WhatsApp connectivity.",
+      "test_id": "merchants-section"
+    },
+    {
+      "id": "contact",
+      "title": "Contact Us ('تواصل معنا')",
+      "description": "Contact info card with phone +972 4-250-3432, address in Jenin, official Facebook profile link, direct inquiry contact form with real-time feedback toast notifications.",
+      "test_id": "contact-section"
+    },
+    {
+      "id": "footer",
+      "title": "Footer Section",
+      "description": "Brand logo, quick links, contact summary, copyright, and subtle Palestine/Jenin badge.",
+      "test_id": "footer-section"
+    }
+  ],
+  "regional_reps": [
+    {
+      "region": "الخليل (Hebron)",
+      "phone": "0598850425",
+      "raw_phone": "+970598850425"
+    },
+    {
+      "region": "طولكرم وقلقيلية وسلفيت (Tulkarm, Qalqilya, Salfit)",
+      "phone": "0592850416",
+      "raw_phone": "+970592850416"
+    },
+    {
+      "region": "رام الله وقراها (Ramallah & Surrounding)",
+      "phone": "0592850435",
+      "raw_phone": "+970592850435"
+    },
+    {
+      "region": "نابلس وجنين (Nablus & Jenin)",
+      "phone": "0598850418",
+      "raw_phone": "+970598850418"
+    }
+  ],
+  "contact_details": {
+    "company_name": "شركة الحياة للاستيراد والتسويق (Al-Hayat Co.)",
+    "location": "جنين - شارع حيفا، بجانب بئر السعادة (Jenin - Haifa Street, near Bir Al-Saada)",
+    "main_phone": "+972 4-250-3432",
+    "tel_link": "tel:+97242503432",
+    "facebook_url": "https://www.facebook.com/profile.php?id=100064555247536",
+    "company_email": ""
+  },
+  "media": {
+    "logo": "/assets/logo/alhayat-logo.png",
+    "products_dir": "/assets/products/",
+    "campaigns_dir": "/assets/campaigns/",
+    "display_strategy": "Never crop text or faces in posters. Use object-contain or object-cover with padded containers and background ambient colors extracted from image tone."
+  },
+  "instructions_to_main_agent": [
+    "1. Ensure the app has dir='rtl' set on the root level html/wrapper.",
+    "2. Inject Lalezar and Alexandria Google Fonts in public/index.html or index.css.",
+    "3. Use tailwind utility classes with RTL awareness (e.g. space-x-reverse, flex-row-reverse where applicable, or native RTL flex flow).",
+    "4. Implement Lenis for smooth momentum scrolling.",
+    "5. Use framer-motion for high-end micro-interactions, floating product physics, modal popups, category filtering animations, and orbit carousel controls.",
+    "6. Every interactive button, link, tab, filter, and input MUST include explicit data-testid attributes (e.g., data-testid='nav-link-products', data-testid='category-btn-jelly').",
+    "7. Do NOT invent fake numbers or generic corporate filler. Keep company history accurate to Palestine/Jenin confectionery import and marketing.",
+    "8. Check header backdrop-blur glass effect ensuring high contrast and readable text on light backgrounds."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "Always set data-testid on interactive elements in kebab-case format.",
+    "Ensure contrast ratio exceeds 4.5:1 for standard text and 3:1 for large display headlines.",
+    "Hover states must explicitly specify text color alongside background changes (e.g., hover:bg-red-600 hover:text-white).",
+    "Do not use dark gradients across the entire page; keep the foundation crisp off-white/cream with rich colorful candy accents.",
+    "Use sonner for toast notifications on contact form submission.",
+    "Ensure full mobile responsiveness with custom touch drawer or menu overlay for mobile navigation."
+  ]
+}
