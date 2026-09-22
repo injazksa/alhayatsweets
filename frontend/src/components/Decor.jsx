@@ -88,7 +88,7 @@ export function Squiggle({ color = '#ED1B26', className = '', style }) {
  * used as a connector between selected sections. */
 export function CandyTrail({ color = '#ED1B26', flip = false, className = '' }) {
   return (
-    <div className={`pointer-events-none relative mx-auto h-20 w-full max-w-2xl ${className}`} aria-hidden="true">
+    <div className={`pointer-events-none relative mx-auto h-14 w-full max-w-2xl sm:h-20 ${className}`} aria-hidden="true">
       <svg viewBox="0 0 600 80" fill="none" className="h-full w-full" style={flip ? { transform: 'scaleX(-1)' } : undefined}>
         <motion.path
           d="M8 58 C 110 6, 210 84, 310 42 S 500 8, 592 50"

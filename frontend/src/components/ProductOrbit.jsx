@@ -170,10 +170,10 @@ function OrbitMobile({ onOpen }) {
           type="button"
           onClick={() => onOpen(p, ITEMS.indexOf(p))}
           data-testid={`orbit-mobile-product-${p.id}`}
-          className="w-48 shrink-0 snap-center rounded-[26px] bg-white p-3 text-right shadow-[0_18px_36px_-26px_rgba(32,26,23,0.4)]"
+          className="w-40 shrink-0 snap-center rounded-[26px] bg-white p-2.5 text-right shadow-[0_18px_36px_-26px_rgba(32,26,23,0.4)]"
         >
-          <div className="rounded-[18px] p-2.5" style={{ background: (CAT_STYLE[p.category] || ['#fff0f3'])[0] }}>
-            <SmartImage img={p.img} alt={p.name} sizes="176px" />
+          <div className="rounded-[18px] p-2" style={{ background: (CAT_STYLE[p.category] || ['#fff0f3'])[0] }}>
+            <SmartImage img={p.img} alt={p.name} sizes="160px" />
           </div>
           <div className="flex items-center justify-between px-1.5 pb-1 pt-2.5">
             <span className="text-sm font-bold text-[#201a17]">{p.name}</span>
@@ -190,7 +190,7 @@ function OrbitMobile({ onOpen }) {
 export default function ProductOrbit() {
   const [modal, setModal] = useState(null);
   return (
-    <section data-testid="circular-orbit-section" className="relative bg-[#FAF8F5] pb-24 pt-20 lg:pb-28">
+    <section data-testid="circular-orbit-section" className="relative bg-[#FAF8F5] pb-16 pt-14 lg:pb-28">
       <CandyCurve fill="#FAF8F5" className="absolute -top-1 left-0 right-0" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
@@ -202,7 +202,7 @@ export default function ProductOrbit() {
             حرّك الماوس على الحلوى.. وخليها تجي إلك
           </h2>
         </div>
-        <div className="mt-12">
+        <div className="mt-8 sm:mt-12">
           <OrbitDesk onOpen={(p) => setModal(p)} />
           <OrbitMobile onOpen={(p) => setModal(p)} />
         </div>

@@ -6,18 +6,25 @@ import { PRODUCTS, CAT_STYLE } from '../data/catalog';
 import { CandyCurve } from './Decor';
 import { prefetchAround } from '../utils';
 
-const CARD_W = 224;
 const GAP = 24;
 
 export default function ProductRail() {
   const [active, setActive] = useState(5);
   const [vw, setVw] = useState(1200);
+  const [cardW, setCardW] = useState(176);
   const vpRef = useRef(null);
   const x = useMotionValue(0);
-  const step = CARD_W + GAP;
+  const step = cardW + GAP;
   const total = PRODUCTS.length;
 
-  const snapX = (i) => vw / 2 - CARD_W / 2 - i * step;
+  useEffect(() => {
+    const onResize = () => setCardW(window.innerWidth < 640 ? 176 : 224);
+    onResize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const snapX = (i) => vw / 2 - cardW / 2 - i * step;
 
   useEffect(() => {
     const measure = () => setVw(vpRef.current ? vpRef.current.offsetWidth : window.innerWidth);
@@ -35,7 +42,7 @@ export default function ProductRail() {
     animate(x, snapX(active), { type: 'spring', stiffness: 200, damping: 30 });
     prefetchAround(PRODUCTS, active, '480');
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, vw]);
+  }, [active, vw, cardW]);
 
   const go = (d) => setActive((a) => Math.min(total - 1, Math.max(0, a + d)));
   const onDragEnd = (e, info) => {
@@ -48,7 +55,7 @@ export default function ProductRail() {
   const curStyle = CAT_STYLE[cur.category] || ['#fff0f3', '#e11d48'];
 
   return (
-    <section id="discovery" data-testid="product-rail-section" className="relative bg-[#F3EFE9] pb-24 pt-20 lg:pb-28 lg:pt-24">
+    <section id="discovery" data-testid="product-rail-section" className="relative bg-[#F3EFE9] pb-16 pt-14 lg:pb-28 lg:pt-24">
       <CandyCurve fill="#F3EFE9" className="absolute -top-1 left-0 right-0" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -108,11 +115,11 @@ export default function ProductRail() {
                   y: isActive ? -8 : 0,
                 }}
                 transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-                className="relative w-56 shrink-0 rounded-[28px] bg-white p-3 text-right shadow-[0_18px_36px_-26px_rgba(32,26,23,0.35)]"
-                style={{ zIndex: isActive ? 10 : 1 }}
+                className="relative shrink-0 rounded-[28px] bg-white p-2.5 text-right shadow-[0_18px_36px_-26px_rgba(32,26,23,0.35)] sm:p-3"
+                style={{ width: cardW, zIndex: isActive ? 10 : 1 }}
               >
-                <div className="rounded-[20px] p-3" style={{ background: (CAT_STYLE[p.category] || ['#fff0f3'])[0] }}>
-                  <SmartImage img={p.img} alt={p.name} sizes="224px" />
+                <div className="rounded-[20px] p-2 sm:p-3" style={{ background: (CAT_STYLE[p.category] || ['#fff0f3'])[0] }}>
+                  <SmartImage img={p.img} alt={p.name} sizes={`${cardW}px`} />
                 </div>
                 <div className="flex items-center justify-between gap-2 px-1.5 pb-1.5 pt-3">
                   <span className="text-sm font-bold text-[#201a17]">{p.name}</span>

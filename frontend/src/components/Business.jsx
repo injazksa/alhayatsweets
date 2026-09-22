@@ -8,7 +8,7 @@ const DOTS = ['#FF4D6D', '#0284C7', '#16A34A', '#CA8A04'];
 
 export default function Business() {
   return (
-    <section id="merchants" data-testid="merchants-section" className="relative bg-[#FAF8F5] pb-28 pt-20 lg:pt-24">
+    <section id="merchants" data-testid="merchants-section" className="relative bg-[#FAF8F5] pb-20 pt-14 lg:pt-24">
       <CandyCurve fill="#FAF8F5" className="absolute -top-1 left-0 right-0" />
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
         {/* copy */}
@@ -60,7 +60,7 @@ export default function Business() {
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.55, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
               whileHover={{ y: -4 }}
-              className="group flex items-center justify-between gap-4 rounded-[24px] border border-[#EFE9E0] bg-white px-5 py-4 shadow-[0_16px_30px_-26px_rgba(32,26,23,0.4)] transition-colors hover:border-[#ED1B26]/40 sm:px-6"
+              className="group flex items-center justify-between gap-4 rounded-[24px] border border-[#EFE9E0] bg-white px-4 py-3.5 shadow-[0_16px_30px_-26px_rgba(32,26,23,0.4)] transition-colors hover:border-[#ED1B26]/40 sm:px-6"
             >
               <div className="flex items-center gap-4">
                 <span

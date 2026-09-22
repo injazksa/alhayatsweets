@@ -18,7 +18,7 @@ const SPRINKLES = [
 
 export default function About() {
   return (
-    <section id="about" data-testid="about-section" className="relative bg-white pb-24 pt-20 lg:pb-32 lg:pt-24">
+    <section id="about" data-testid="about-section" className="relative bg-white pb-16 pt-14 lg:pb-32 lg:pt-24">
       <CandyCurve fill="#ffffff" className="absolute -top-1 left-0 right-0" />
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-14 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
         {/* copy */}
@@ -49,10 +49,10 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.55, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                className="flex items-start gap-5 border-t border-[#F0EAE1] py-5 last:border-b"
+                className="flex items-start gap-4 border-t border-[#F0EAE1] py-4 last:border-b sm:gap-5"
                 data-testid={`about-chapter-${i + 1}`}
               >
-                <span className="font-display text-3xl leading-none text-[#ED1B26] sm:text-4xl">{c.n}</span>
+                <span className="font-display text-2xl leading-none text-[#ED1B26] sm:text-4xl">{c.n}</span>
                 <div>
                   <h3 className="font-display text-xl leading-none text-[#201a17]">{c.t}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[#5c544e]">{c.d}</p>
@@ -81,7 +81,7 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0, rotate: 5 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute -bottom-8 left-[2%] z-20 w-36 rounded-[26px] bg-white p-2.5 shadow-[0_26px_50px_-26px_rgba(32,26,23,0.5)] sm:w-44"
+            className="absolute -bottom-8 left-[2%] z-20 w-28 rounded-[26px] bg-white p-2 shadow-[0_26px_50px_-26px_rgba(32,26,23,0.5)] sm:w-44"
             data-testid="about-visual-card"
           >
             <SmartImage img={HERO.aboutCard} alt="بوفي مارشميلو" sizes="176px" className="rounded-[18px]" />
@@ -100,7 +100,7 @@ export default function About() {
       </div>
 
       {/* candy trail leading to the next chapter */}
-      <CandyTrail color="#ED1B26" className="mt-16" />
+      <CandyTrail color="#ED1B26" className="mt-10" />
     </section>
   );
 }

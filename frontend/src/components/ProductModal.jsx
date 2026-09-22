@@ -50,7 +50,7 @@ export default function ProductModal({ product, onClose }) {
             </button>
 
             <div
-              className="grid place-items-center p-8 sm:p-10"
+              className="grid place-items-center p-6 sm:p-10"
               style={{ background: (CAT_STYLE[product.category] || ['#fff0f3'])[0] }}
             >
               <SmartImage
@@ -62,7 +62,7 @@ export default function ProductModal({ product, onClose }) {
               />
             </div>
 
-            <div className="flex flex-col justify-center gap-4 p-8 sm:p-10">
+            <div className="flex flex-col justify-center gap-3 p-6 sm:gap-4 sm:p-10">
               <div>
                 <span
                   className="inline-block rounded-full px-3 py-1 text-xs font-bold"
@@ -74,7 +74,7 @@ export default function ProductModal({ product, onClose }) {
                   {product.category}
                 </span>
               </div>
-              <h3 className="font-display text-3xl leading-snug text-[#201a17] sm:text-4xl">
+              <h3 className="font-display text-2xl leading-snug text-[#201a17] sm:text-4xl">
                 {product.name}
               </h3>
               {product.tags.length > 0 && (

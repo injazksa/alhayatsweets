@@ -36,7 +36,7 @@ export default function Catalog() {
   };
 
   return (
-    <section id="products" data-testid="category-filter-section" className="relative bg-[#F6F1EA] pb-28 pt-20 lg:pt-24">
+    <section id="products" data-testid="category-filter-section" className="relative bg-[#F6F1EA] pb-20 pt-14 lg:pt-24">
       <CandyCurve fill="#F6F1EA" className="absolute -top-1 left-0 right-0" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl">
@@ -53,7 +53,7 @@ export default function Catalog() {
         </div>
 
         {/* category chips — candy pills */}
-        <div dir="rtl" className="no-bar -mx-4 mt-8 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0" data-testid="category-chips-row">
+        <div dir="rtl" className="no-bar -mx-4 mt-6 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:px-0" data-testid="category-chips-row">
           {CATEGORIES.map((c) => {
             const isActive = c === cat;
             return (
@@ -62,12 +62,12 @@ export default function Catalog() {
                 type="button"
                 onClick={() => setCat(c)}
                 data-testid={`category-btn-${c.replace(/\s/g, '-')}`}
-                className={`whitespace-nowrap rounded-full border text-sm font-bold transition-all ${
+                className={`whitespace-nowrap rounded-full border text-xs font-bold transition-all sm:text-sm ${
                   isActive
-                    ? 'border-transparent bg-[#ED1B26] px-5 py-2.5 text-white shadow-[0_12px_24px_-12px_rgba(237,27,38,0.6)]'
-                    : 'border-[#E5DED4] bg-white px-4.5 py-2 text-[#5c544e] hover:border-[#ED1B26] hover:text-[#ED1B26]'
+                    ? 'border-transparent bg-[#ED1B26] px-4 py-2 text-white shadow-[0_12px_24px_-12px_rgba(237,27,38,0.6)] sm:px-5 sm:py-2.5'
+                    : 'border-[#E5DED4] bg-white text-[#5c544e] hover:border-[#ED1B26] hover:text-[#ED1B26]'
                 }`}
-                style={!isActive ? { padding: '8px 18px' } : undefined}
+                style={!isActive ? { padding: '6px 14px' } : undefined}
               >
                 {c}
               </button>
@@ -78,7 +78,7 @@ export default function Catalog() {
         {/* editorial shelf — product imagery first, chrome minimal */}
         <motion.div
           layout
-          className="mt-8 grid auto-rows-[minmax(230px,auto)] grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4 lg:auto-rows-[minmax(260px,auto)]"
+          className="mt-7 grid auto-rows-[minmax(185px,auto)] grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4 lg:auto-rows-[minmax(260px,auto)]"
           data-testid="products-grid"
         >
           <AnimatePresence mode="popLayout">
@@ -116,7 +116,7 @@ export default function Catalog() {
                     </span>
                   </div>
                   <div className="px-4 pb-3.5 pt-3">
-                    <span className="text-[15px] font-bold text-[#201a17] sm:text-base">{p.name}</span>
+                    <span className="text-sm font-bold text-[#201a17] sm:text-base">{p.name}</span>
                   </div>
                 </motion.button>
               );

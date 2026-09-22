@@ -151,7 +151,7 @@ export default function Header() {
               <span className="h-11 w-11" aria-hidden="true" />
             </div>
 
-            <nav className="relative flex flex-1 flex-col justify-center gap-1 px-7" aria-label="قائمة الجوال">
+            <nav className="relative flex flex-1 flex-col justify-center gap-0.5 px-7" aria-label="قائمة الجوال">
               {NAV_LINKS.map((l, i) => (
                 <motion.a
                   key={l.id}
@@ -161,7 +161,7 @@ export default function Header() {
                   initial={{ opacity: 0, x: 44 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.1 + 0.05 * i, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className={`flex items-center gap-3.5 rounded-2xl px-4 py-3.5 font-display text-[2rem] leading-none transition-colors ${
+                  className={`flex items-center gap-3.5 rounded-2xl px-4 py-3 font-display text-[1.65rem] leading-none transition-colors ${
                     active === l.id ? 'text-[#ED1B26]' : 'text-[#201a17] hover:text-[#ED1B26]'
                   }`}
                 >
@@ -179,12 +179,12 @@ export default function Header() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.42, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="relative flex flex-col gap-2.5 px-7 pb-10"
+              className="relative flex flex-col gap-2.5 px-7 pb-8"
             >
               <a
                 href={COMPANY.phoneHref}
                 data-testid="mobile-menu-call-cta"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ED1B26] px-5 py-3.5 text-sm font-bold text-white"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#ED1B26] px-5 py-3 text-sm font-bold text-white"
               >
                 <Phone size={16} />
                 اتصل بنا

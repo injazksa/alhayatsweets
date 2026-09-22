@@ -52,7 +52,7 @@ export default function Hero() {
   const resetTilt = () => setTilt({ x: 0, y: 0 });
 
   return (
-    <section id="home" ref={ref} data-testid="hero-section" className="relative overflow-hidden pb-20 pt-24 sm:pt-28 lg:pb-28 lg:pt-36">
+    <section id="home" ref={ref} data-testid="hero-section" className="relative overflow-hidden pb-14 pt-20 sm:pt-28 lg:pb-28 lg:pt-36">
       {/* soft organic background */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div className="absolute -top-24 right-[-10%] h-[420px] w-[420px] rounded-full bg-[#FFF0F3]" />
@@ -67,14 +67,14 @@ export default function Hero() {
           <motion.img
             src="/assets/logo/alhayat-logo.png"
             alt="شركة الحياة للاستيراد والتسويق"
-            className="h-16 w-auto sm:h-20"
+            className="h-14 w-auto sm:h-20"
             variants={fadeUp}
             custom={0}
             initial="hidden"
             animate="show"
           />
 
-          <h1 className="font-display mt-6 text-[2.7rem] leading-[1.14] text-[#201a17] sm:text-6xl lg:text-[3.55rem]">
+          <h1 className="font-display mt-5 text-[2.3rem] leading-[1.16] text-[#201a17] sm:text-6xl lg:text-[3.55rem]">
             <span className="block overflow-hidden pb-1">
               <motion.span className="block" variants={lineReveal} custom={0} initial="hidden" animate="show">
                 الحياة أحلى
@@ -103,7 +103,7 @@ export default function Hero() {
               type="button"
               onClick={() => scrollToId('products')}
               data-testid="hero-cta-products"
-              className="rounded-full bg-[#ED1B26] px-7 py-3.5 text-sm font-bold text-white shadow-[0_16px_30px_-14px_rgba(237,27,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-[#C4121B] hover:text-white sm:text-base"
+              className="rounded-full bg-[#ED1B26] px-6 py-3 text-[13.5px] font-bold text-white shadow-[0_16px_30px_-14px_rgba(237,27,38,0.55)] transition-all hover:-translate-y-0.5 hover:bg-[#C4121B] hover:text-white sm:px-7 sm:py-3.5 sm:text-base"
             >
               استكشف منتجاتنا
             </button>
@@ -111,7 +111,7 @@ export default function Hero() {
               type="button"
               onClick={() => scrollToId('contact')}
               data-testid="hero-cta-contact"
-              className="rounded-full border-2 border-[#201a17]/15 bg-white/70 px-7 py-3.5 text-sm font-bold text-[#201a17] transition-all hover:-translate-y-0.5 hover:border-[#ED1B26] hover:text-[#ED1B26] sm:text-base"
+              className="rounded-full border-2 border-[#201a17]/15 bg-white/70 px-6 py-3 text-[13.5px] font-bold text-[#201a17] transition-all hover:-translate-y-0.5 hover:border-[#ED1B26] hover:text-[#ED1B26] sm:px-7 sm:py-3.5 sm:text-base"
             >
               تواصل معنا
             </button>
@@ -126,7 +126,7 @@ export default function Hero() {
             onMouseLeave={resetTilt}
             animate={{ rotateX: tilt.x, rotateY: tilt.y }}
             transition={{ type: 'spring', stiffness: 110, damping: 16 }}
-            className="relative mx-auto h-[430px] max-w-[560px] sm:h-[540px]"
+            className="relative mx-auto h-[350px] max-w-[470px] sm:h-[540px]"
             data-testid="hero-collage"
           >
             {/* orbit rings behind the composition */}
@@ -142,7 +142,7 @@ export default function Hero() {
             <motion.div style={{ y: yMain }} className="absolute inset-x-0 top-4 z-10 mx-auto w-[84%]">
               <div className="floaty" style={{ '--dur': '7s' }}>
                 <div
-                  className="overflow-hidden bg-[#FFF0F3] p-7 shadow-[0_36px_70px_-34px_rgba(32,26,23,0.4)]"
+                  className="overflow-hidden bg-[#FFF0F3] p-4 shadow-[0_36px_70px_-34px_rgba(32,26,23,0.4)] sm:p-7"
                   style={{ borderRadius: '58% 42% 55% 45% / 48% 52% 48% 52%' }}
                 >
                   <SmartImage img={HERO.main} alt="يوبو ميتر – أشرطة الجيلي بنكهات متعددة" eager sizes="(max-width: 1024px) 70vw, 420px" />
@@ -150,13 +150,13 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            <motion.div style={{ y: yA }} className="absolute -top-3 right-[1%] z-20 w-36 sm:w-48">
+            <motion.div style={{ y: yA }} className="absolute -top-3 right-[1%] z-20 w-28 sm:w-48">
               <div className="floaty rounded-[26px] bg-white p-2.5 shadow-[0_28px_50px_-26px_rgba(32,26,23,0.45)]" style={{ '--tilt': '-5deg', '--dur': '6s' }}>
                 <SmartImage img={HERO.floatA} alt="بوفي مارشميلو" eager sizes="(max-width: 1024px) 30vw, 180px" className="rounded-[18px]" />
               </div>
             </motion.div>
 
-            <motion.div style={{ y: yB }} className="absolute -bottom-2 left-[1%] z-20 w-32 sm:w-44">
+            <motion.div style={{ y: yB }} className="absolute -bottom-2 left-[1%] z-20 w-28 sm:w-44">
               <div className="floaty rounded-[26px] bg-white p-2.5 shadow-[0_28px_50px_-26px_rgba(32,26,23,0.45)]" style={{ '--tilt': '4deg', '--dur': '8s' }}>
                 <SmartImage img={HERO.floatB} alt="مصاصات بنكهات مشكلة" eager sizes="(max-width: 1024px) 28vw, 165px" className="rounded-[18px]" />
               </div>

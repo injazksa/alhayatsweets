@@ -61,7 +61,7 @@ export default function Campaigns() {
   const activeTint = CAMPAIGNS[idx].tint;
 
   return (
-    <section id="ads" data-testid="campaigns-section" className="relative overflow-hidden bg-white pb-28 pt-20 lg:pt-24">
+    <section id="ads" data-testid="campaigns-section" className="relative overflow-hidden bg-white pb-20 pt-14 lg:pt-24">
       <CandyCurve fill="#ffffff" className="absolute -top-1 left-0 right-0" />
       {/* ambient glow influenced by the active campaign color */}
       <motion.div
@@ -113,7 +113,7 @@ export default function Campaigns() {
         </div>
       </div>
 
-      <div ref={vpRef} dir="ltr" className="relative mt-10 cursor-grab overflow-hidden active:cursor-grabbing">
+      <div ref={vpRef} dir="ltr" className="relative mt-6 cursor-grab overflow-hidden active:cursor-grabbing sm:mt-10">
         <motion.div
           drag="x"
           style={{ x }}
@@ -137,7 +137,7 @@ export default function Campaigns() {
                 <motion.div
                   animate={{ scale: isActive ? 1 : 0.94, opacity: isActive ? 1 : 0.6 }}
                   transition={{ type: 'spring', stiffness: 200, damping: 28 }}
-                  className="overflow-hidden rounded-[30px] p-4 shadow-[0_40px_80px_-44px_rgba(32,26,23,0.55)]"
+                  className="overflow-hidden rounded-[30px] p-2.5 shadow-[0_40px_80px_-44px_rgba(32,26,23,0.55)] sm:p-4"
                   style={{ background: c.tint }}
                 >
                   <SmartImage
@@ -147,9 +147,9 @@ export default function Campaigns() {
                     className="rounded-[20px]"
                     eager={i >= 1 && i <= 3}
                   />
-                  <div className="flex items-center justify-between gap-3 px-2 pb-1.5 pt-3.5">
-                    <span className="font-display text-xl leading-none text-[#201a17]">{c.name}</span>
-                    <span className="text-[11px] font-semibold text-[#8a8178]">{c.note}</span>
+                  <div className="flex items-center justify-between gap-3 px-2 pb-1 pt-2.5 sm:pt-3.5">
+                    <span className="font-display text-base leading-none text-[#201a17] sm:text-xl">{c.name}</span>
+                    <span className="text-[10px] font-semibold text-[#8a8178] sm:text-[11px]">{c.note}</span>
                   </div>
                 </motion.div>
               </div>

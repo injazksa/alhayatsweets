@@ -5,11 +5,11 @@ import { scrollToId } from '../utils';
 export default function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer data-testid="footer-section" className="bg-[#1B1310] pb-10 pt-16 text-[#EDE7DE]">
+    <footer data-testid="footer-section" className="bg-[#1B1310] pb-8 pt-12 text-[#EDE7DE]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-10 md:flex-row md:items-center">
           <a href="#home" onClick={(e) => { e.preventDefault(); scrollToId('home'); }} data-testid="footer-logo-link" aria-label={COMPANY.nameAr}>
-            <img src="/assets/logo/alhayat-logo.png" alt={COMPANY.nameAr} className="h-20 w-auto rounded-2xl bg-white p-2.5" />
+            <img src="/assets/logo/alhayat-logo.png" alt={COMPANY.nameAr} className="h-16 w-auto rounded-2xl bg-white p-2.5" />
           </a>
 
           <nav className="flex flex-wrap gap-x-7 gap-y-3" aria-label="روابط الفوتر">

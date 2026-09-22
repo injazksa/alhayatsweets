@@ -5,7 +5,7 @@ import { CandyCurve } from './Decor';
 
 export default function Contact() {
   return (
-    <section id="contact" data-testid="contact-section" className="relative bg-[#ED1B26] pb-24 pt-20 lg:pt-24">
+    <section id="contact" data-testid="contact-section" className="relative bg-[#ED1B26] pb-16 pt-14 lg:pt-24">
       <CandyCurve fill="#ED1B26" className="absolute -top-1 left-0 right-0" />
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-white/10" />
@@ -23,7 +23,7 @@ export default function Contact() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="mb-3 text-sm font-bold tracking-wide text-white/80">تواصل معنا</p>
-          <h2 className="font-display text-4xl leading-snug text-white sm:text-5xl">
+          <h2 className="font-display text-[1.95rem] leading-snug text-white sm:text-5xl">
             جاهزين نخدمك.. ومذاقنا بيوصلك
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/85">
@@ -41,7 +41,7 @@ export default function Contact() {
           <a
             href={COMPANY.phoneHref}
             data-testid="contact-call-cta"
-            className="inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-base font-bold text-[#ED1B26] shadow-[0_20px_40px_-18px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:bg-[#FFF0F3]"
+            className="inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-bold text-[#ED1B26] shadow-[0_20px_40px_-18px_rgba(0,0,0,0.35)] transition-all hover:-translate-y-0.5 hover:bg-[#FFF0F3] sm:px-8 sm:py-4 sm:text-base"
           >
             <Phone size={18} />
             اتصل بنا
@@ -52,7 +52,7 @@ export default function Contact() {
             target="_blank"
             rel="noreferrer"
             data-testid="contact-facebook-cta"
-            className="inline-flex items-center gap-2.5 rounded-full border-2 border-white/60 px-7 py-4 text-base font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white hover:text-[#ED1B26]"
+            className="inline-flex items-center gap-2.5 rounded-full border-2 border-white/60 px-6 py-3.5 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white hover:text-[#ED1B26] sm:px-7 sm:py-4 sm:text-base"
           >
             <Facebook size={18} />
             صفحتنا على فيسبوك
@@ -70,11 +70,11 @@ export default function Contact() {
             <a
               href={`mailto:${COMPANY.email}`}
               data-testid="contact-email-cta"
-              className="inline-flex items-center gap-2.5 rounded-full border-2 border-white/60 px-7 py-4 text-base font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white hover:text-[#ED1B26]"
+              className="inline-flex items-center gap-2.5 rounded-full border-2 border-white/60 px-6 py-3.5 text-xs font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white hover:text-[#ED1B26] sm:px-7 sm:py-4 sm:text-base"
             >
-              <Mail size={18} />
+              <Mail size={17} />
               راسلنا بالبريد
-              <span className="num-ltr text-sm font-bold">{COMPANY.email}</span>
+              <span className="num-ltr text-xs font-bold sm:text-sm">{COMPANY.email}</span>
             </a>
           )}
         </motion.div>
@@ -88,7 +88,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-3xl bg-white/10 px-7 py-5 text-white transition-colors hover:bg-white/15"
+          className="mt-8 inline-flex flex-wrap items-center justify-center gap-2 rounded-3xl bg-white/10 px-5 py-4 text-white transition-colors hover:bg-white/15 sm:px-7 sm:py-5"
         >
           <MapPin size={20} className="shrink-0" />
           <span className="text-base font-bold">{COMPANY.address}</span>
